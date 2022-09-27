@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:hydrated_bloc/hydrated_bloc.dart';
-import 'package:path_provider/path_provider.dart';
 
-import 'package:todo_bloc/screens/task_screen.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:todo_bloc/screens/tabs_screen.dart';
 import 'package:todo_bloc/services/app_router.dart';
 import 'package:todo_bloc/widgets/app_theme.dart';
 
@@ -39,7 +38,7 @@ class MyApp extends StatelessWidget {
             theme: state.switchValue
                 ? AppThemes.appThemeData[AppTheme.darkTheme]
                 : AppThemes.appThemeData[AppTheme.lightTheme],
-            home: const TaskScreen(),
+            home: const TabsScreen(),
             onGenerateRoute: appRouter.onGenerateRoute,
           );
         },

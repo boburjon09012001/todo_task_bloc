@@ -17,7 +17,7 @@ class RecycleBin extends StatelessWidget {
               IconButton(onPressed: () {}, icon: const Icon(Icons.add))
             ],
           ),
-          drawer:  AppDrawer(),
+          drawer:  const AppDrawer(),
           body: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [

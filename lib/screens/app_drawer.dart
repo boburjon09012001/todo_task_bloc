@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo_bloc/screens/recycle_bin.dart';
-import 'package:todo_bloc/screens/task_screen.dart';
+import 'package:todo_bloc/screens/tabs_screen.dart';
+
 
 import '../blocs/bloc/bloc/task_bloc.dart';
 import '../blocs/switch_bloc/bloc/switch_bloc.dart';
 
 class AppDrawer extends StatelessWidget {
-  AppDrawer({super.key});
+  const AppDrawer({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +27,7 @@ class AppDrawer extends StatelessWidget {
               builder: (context, state) {
                 return GestureDetector(
                   onTap: () =>
-                      Navigator.of(context).pushReplacementNamed(TaskScreen.id),
+                      Navigator.of(context).pushReplacementNamed(TabsScreen.id),
                   child: ListTile(
                     leading: const Icon(Icons.folder_special),
                     title: const Text("My Task"),
@@ -51,13 +52,12 @@ class AppDrawer extends StatelessWidget {
             ),
             BlocBuilder<SwitchBloc, SwitchState>(
               builder: (context, state) {
-                bool switchValue = false;
                 return Switch(
-                    value: switchValue,
+                    value: state.switchValue,
                     onChanged: (newValue) {
-                      newValue
-                          ? context.read<SwitchBloc>().add(SwitchOnEvent())
-                          : context.read<SwitchBloc>().add(SwitchOffEvent());
+                      context
+                          .read<SwitchBloc>()
+                          .add(SwitchOnEvent(state.switchValue));
                     });
               },
             ),
