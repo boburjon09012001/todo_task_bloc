@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo_bloc/screens/recycle_bin.dart';
 import 'package:todo_bloc/screens/task_screen.dart';
-import '../blocs/bloc_export.dart';
 
-class AppDrawer extends StatefulWidget {
+import '../blocs/bloc/bloc/task_bloc.dart';
+import '../blocs/switch_bloc/bloc/switch_bloc.dart';
+
+class AppDrawer extends StatelessWidget {
   AppDrawer({super.key});
-  @override
-  State<AppDrawer> createState() => _AppDrawerState();
-}
 
-class _AppDrawerState extends State<AppDrawer> {
-  bool switchValue = false;
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -53,6 +51,7 @@ class _AppDrawerState extends State<AppDrawer> {
             ),
             BlocBuilder<SwitchBloc, SwitchState>(
               builder: (context, state) {
+                bool switchValue = false;
                 return Switch(
                     value: switchValue,
                     onChanged: (newValue) {

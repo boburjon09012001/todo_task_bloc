@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import '../blocs/task_bloc/bloc/task_bloc.dart';
+import '../blocs/bloc_export.dart';
 import '../widgets/task_lists.dart';
 import 'app_drawer.dart';
 
