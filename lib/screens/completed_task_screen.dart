@@ -8,18 +8,18 @@ import '../widgets/task_lists.dart';
 class CompletedScreen extends StatelessWidget {
   const CompletedScreen({super.key});
   static const id = "completed_screen";
- 
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<TaskBloc, TaskState>(
       builder: (context, state) {
-        List<Task> listTask = state.allTasks;
+        List<Task> listTask = state.completedTask;
         return Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Center(
               child: Chip(
-                label: Text(" Tasks: ${state.allTasks.length}"),
+                label: Text(" Tasks: ${listTask.length}"),
               ),
             ),
             TaskLists(listTask: listTask),

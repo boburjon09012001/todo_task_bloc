@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todo_bloc/blocs/bloc/bloc/task_event.dart';
 import '../blocs/bloc_export.dart';
 import '../widgets/task_lists.dart';
 import 'app_drawer.dart';
@@ -14,10 +15,22 @@ class RecycleBin extends StatelessWidget {
           appBar: AppBar(
             title: const Text("Recycle Bin"),
             actions: [
-              IconButton(onPressed: () {}, icon: const Icon(Icons.add))
+              PopupMenuButton(
+                itemBuilder: (context) => [
+                  PopupMenuItem(
+                    onTap: () {
+                      context.read<TaskBloc>().add(DeleteAllTask());
+                    },
+                    child: TextButton.icon(
+                        onPressed: () {},
+                        icon: const Icon(Icons.delete_forever),
+                        label: const Text("Delete all tasks")),
+                  ),
+                ],
+              ),
             ],
           ),
-          drawer:  const AppDrawer(),
+          drawer: const AppDrawer(),
           body: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [

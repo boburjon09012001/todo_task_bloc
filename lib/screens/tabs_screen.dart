@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:todo_bloc/screens/app_drawer.dart';
 import 'package:todo_bloc/screens/panding_screen.dart';
@@ -27,6 +25,7 @@ class _TabsScreenState extends State<TabsScreen> {
 
   void _addTask(BuildContext context) {
     showModalBottomSheet(
+      isScrollControlled: true,
       context: context,
       builder: (context) => SingleChildScrollView(
         child: Container(
@@ -53,13 +52,15 @@ class _TabsScreenState extends State<TabsScreen> {
       ),
       drawer: const AppDrawer(),
       body: _pageDetails[_selectedPageIndex]["pageName"],
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          _addTask(context);
-        },
-        tooltip: "Add task",
-        child: const Icon(Icons.add),
-      ),
+      floatingActionButton: _selectedPageIndex == 0
+          ? FloatingActionButton(
+              onPressed: () {
+                _addTask(context);
+              },
+              tooltip: "Add task",
+              child: const Icon(Icons.add),
+            )
+          : null,
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedPageIndex,
         onTap: (index) {
@@ -69,7 +70,7 @@ class _TabsScreenState extends State<TabsScreen> {
         },
         items: const [
           BottomNavigationBarItem(
-            icon: Icon(Icons.list),
+            icon: Icon(Icons.incomplete_circle_sharp),
             label: "Panding Task",
           ),
           BottomNavigationBarItem(

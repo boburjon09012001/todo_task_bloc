@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo_bloc/screens/recycle_bin.dart';
 import 'package:todo_bloc/screens/tabs_screen.dart';
 
-
 import '../blocs/bloc/bloc/task_bloc.dart';
 import '../blocs/switch_bloc/bloc/switch_bloc.dart';
 
@@ -31,7 +30,9 @@ class AppDrawer extends StatelessWidget {
                   child: ListTile(
                     leading: const Icon(Icons.folder_special),
                     title: const Text("My Task"),
-                    trailing: Text('${state.allTasks.length}'),
+                    trailing: Text(
+                      '${state.pandingTask.length} | ${state.completedTask.length}',
+                    ),
                   ),
                 );
               },

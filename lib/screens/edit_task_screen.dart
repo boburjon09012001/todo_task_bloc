@@ -4,24 +4,26 @@ import 'package:todo_bloc/blocs/bloc/bloc/task_event.dart';
 
 import '../blocs/bloc/bloc/task_bloc.dart';
 import '../models/task.dart';
-import '../services/guid_gen.dart';
 
-// ignore: must_be_immutable
-class AddTaskScreen extends StatelessWidget {
-  AddTaskScreen({
+class EditTaskScreen extends StatelessWidget {
+  final Task oldTask;
+  const EditTaskScreen({
     Key? key,
+    required this.oldTask,
   }) : super(key: key);
-  TextEditingController titleController = TextEditingController();
-  TextEditingController descriptionController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
+    TextEditingController titleController =
+        TextEditingController(text: oldTask.title);
+    TextEditingController descriptionController =
+        TextEditingController(text: oldTask.description);
     return Container(
       padding: const EdgeInsets.all(20),
       child: Column(
         children: [
           const Text(
-            "Add task",
+            "Edit task",
             style: TextStyle(fontSize: 24.0),
           ),
           const SizedBox(
@@ -64,15 +66,19 @@ class AddTaskScreen extends StatelessWidget {
                 padding: const EdgeInsets.all(8.0),
                 child: ElevatedButton(
                     onPressed: () {
-                      var task = Task(
+                      var editedTask = Task(
                           title: titleController.text,
-                          id: GuidGen.generate(),
+                          id: oldTask.id,
+                          isFavorite: oldTask.isFavorite,
+                          isDone: false,
                           date: DateTime.now().toString(),
                           description: descriptionController.text);
-                      context.read<TaskBloc>().add(AddTask(task: task));
+                      context
+                          .read<TaskBloc>()
+                          .add(EditTask(oldTask: oldTask, newTask: editedTask));
                       Navigator.pop(context);
                     },
-                    child: const Text("Add")),
+                    child: const Text("Save")),
               ),
             ],
           )

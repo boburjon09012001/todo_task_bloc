@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:equatable/equatable.dart';
+
 import '../../../models/task.dart';
 
 class TaskEvent extends Equatable {
@@ -41,3 +42,34 @@ class RemovedTask extends TaskEvent {
   @override
   List<Object> get props => [task];
 }
+
+class MarkFavoriteOrUnFavoriteTask extends TaskEvent {
+  final Task task;
+  const MarkFavoriteOrUnFavoriteTask({
+    required this.task,
+  });
+  @override
+  List<Object> get props => [task];
+}
+
+class EditTask extends TaskEvent {
+  final Task oldTask;
+  final Task newTask;
+  const EditTask({
+    required this.oldTask,
+    required this.newTask,
+  });
+  @override
+  List<Object> get props => [oldTask, newTask];
+}
+
+class RestoreTask extends TaskEvent {
+  final Task task;
+  const RestoreTask({
+    required this.task,
+  });
+  @override
+  List<Object> get props => [task];
+}
+
+class DeleteAllTask extends TaskEvent {}
